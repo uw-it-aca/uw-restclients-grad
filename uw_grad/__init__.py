@@ -4,7 +4,7 @@ This is the interface for interacting with the UW Libraries Web Service.
 
 import logging
 from datetime import datetime
-from restclients_core.dao import Grad_DAO
+from uw_grad.dao import Grad_DAO
 from restclients_core.exceptions import DataFailureException
 
 

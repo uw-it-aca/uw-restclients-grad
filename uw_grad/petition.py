@@ -3,9 +3,9 @@ Interfacing with the Grad Scho Petition Request API
 """
 import logging
 import json
-from restclients_core.models.grad import GradPetition
-from restclients_core.pws import PWS
-from restclients_core.grad import get_resource, datetime_from_string
+from uw_grad.models import GradPetition
+from uw_pws.dao import PWS_DAO as PWS
+from uw_grad import get_resource, datetime_from_string
 
 
 PREFIX = "/services/students/v1/api/petition?id="

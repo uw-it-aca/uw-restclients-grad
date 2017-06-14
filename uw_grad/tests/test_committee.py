@@ -1,8 +1,9 @@
 import datetime
 from django.test import TestCase
 from restclients_core.exceptions import DataFailureException
-from restclients_core.grad.committee import get_committee_by_regid
-from restclients_core.test import fdao_grad_override, fdao_pws_override
+from uw_grad.committee import get_committee_by_regid
+from uw_pws.util import fdao_pws_override
+from uw_grad.util import fdao_grad_override
 
 
 @fdao_grad_override
