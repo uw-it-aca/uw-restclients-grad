@@ -4,7 +4,7 @@ Interfacing with the GradScho Degree Request API
 import logging
 import json
 from uw_grad.models import GradLeave, GradTerm
-from uw_pws.dao import PWS_DAO as PWS
+from uw_pws import PWS
 from uw_grad import get_resource, datetime_from_string
 
 

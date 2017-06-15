@@ -1,5 +1,5 @@
 import datetime
-from django.test import TestCase
+from unittest import TestCase
 from restclients_core.exceptions import DataFailureException
 from uw_grad.committee import get_committee_by_regid
 from uw_pws.util import fdao_pws_override

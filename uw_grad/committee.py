@@ -4,7 +4,7 @@ Interfacing with the Grad Scho Committee Request API
 import logging
 import json
 from uw_grad.models import GradCommitteeMember, GradCommittee
-from uw_pws.dao import PWS_DAO as PWS
+from uw_pws import PWS
 from uw_grad import get_resource, datetime_from_string
 
 
