@@ -5,7 +5,7 @@ import logging
 import json
 from uw_grad.models import GradDegree
 from uw_pws import PWS
-from uw_grad import get_resource, datetime_from_string
+from uw_grad import get_resource, parse_datetime
 
 
 PREFIX = "/services/students/v1/api/request?id="
@@ -37,16 +37,15 @@ def _process_json(json_data):
         degree = GradDegree()
         degree.degree_title = item["degreeTitle"]
         degree.exam_place = item["examPlace"]
-        degree.exam_date = datetime_from_string(item["examDate"])
+        degree.exam_date = parse_datetime(item.get("examDate"))
         degree.req_type = item["requestType"]
         degree.major_full_name = item["majorFullName"]
-        degree.submit_date = datetime_from_string(item["requestSubmitDate"])
-        if 'decisionDate' in item and item.get('decisionDate') is not None:
-            degree.decision_date = datetime_from_string(
-                item.get('decisionDate'))
+        degree.submit_date = parse_datetime(item.get("requestSubmitDate"))
+        degree.decision_date = parse_datetime(item.get('decisionDate'))
         degree.status = item["status"]
         degree.target_award_year = item["targetAwardYear"]
-        if item.get("targetAwardQuarter") is not None:
+        if item.get("targetAwardQuarter")and\
+           len(item.get("targetAwardQuarter")):
             degree.target_award_quarter = item["targetAwardQuarter"].lower()
 
         requests.append(degree)

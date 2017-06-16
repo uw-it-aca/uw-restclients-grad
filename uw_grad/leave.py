@@ -5,7 +5,7 @@ import logging
 import json
 from uw_grad.models import GradLeave, GradTerm
 from uw_pws import PWS
-from uw_grad import get_resource, datetime_from_string
+from uw_grad import get_resource, parse_datetime
 
 
 PREFIX = "/services/students/v1/api/leave?id="
@@ -35,8 +35,8 @@ def _process_json(data):
     for item in data:
         leave = GradLeave()
         leave.reason = item.get('leaveReason')
-        leave.submit_date = datetime_from_string(item.get('submitDate'))
-        if item.get('status') is not None and len(item.get('status')) > 0:
+        leave.submit_date = parse_datetime(item.get('submitDate'))
+        if item.get('status') and len(item.get('status')):
             leave.status = item.get('status').lower()
 
         for quarter in item.get('quarters'):

@@ -5,7 +5,7 @@ from restclients_core import models
 def get_datetime_str(datetime_obj):
     if datetime_obj is None:
         return None
-    return datetime_obj.isoformat()
+    return datetime_obj.strftime("%Y-%m-%dT%H:%M:%S")
 
 
 class GradTerm(models.Model):

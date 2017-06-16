@@ -5,7 +5,7 @@ import logging
 import json
 from uw_grad.models import GradPetition
 from uw_pws import PWS
-from uw_grad import get_resource, datetime_from_string
+from uw_grad import get_resource, parse_datetime
 
 
 PREFIX = "/services/students/v1/api/petition?id="
@@ -35,19 +35,14 @@ def _process_json(data):
     for item in data:
         petition = GradPetition()
         petition.description = item.get('description')
-        petition.submit_date = datetime_from_string(item.get('submitDate'))
-        if 'decisionDate' in item and item.get('decisionDate') is not None:
-            petition.decision_date = datetime_from_string(
-                item.get('decisionDate'))
-        else:
-            petition.decision_date = None
+        petition.submit_date = parse_datetime(item.get('submitDate'))
+        petition.decision_date = parse_datetime(item.get('decisionDate'))
 
-        if item.get('deptRecommend') is not None and\
-                len(item.get('deptRecommend')) > 0:
+        if item.get('deptRecommend') and len(item.get('deptRecommend')):
             petition.dept_recommend = item.get('deptRecommend').lower()
 
-        if item.get('gradSchoolDecision') is not None and\
-                len(item.get('gradSchoolDecision')) > 0:
+        if item.get('gradSchoolDecision') and\
+           len(item.get('gradSchoolDecision')):
             petition.gradschool_decision =\
                 item.get('gradSchoolDecision').lower()
         requests.append(petition)

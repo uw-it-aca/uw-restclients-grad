@@ -3,7 +3,7 @@ This is the interface for interacting with the UW Libraries Web Service.
 """
 
 import logging
-from datetime import datetime
+from dateutil.parser import parse
 from uw_grad.dao import Grad_DAO
 from restclients_core.exceptions import DataFailureException
 
@@ -23,10 +23,7 @@ def get_resource(url):
     return response.data
 
 
-def datetime_from_string(date_string):
-    if date_string is None:
-        return None
-    date_format = "%Y-%m-%dT%H:%M:%S"
-    if len(date_string) > 20:
-        date_string = date_string[0:19]
-    return datetime.strptime(date_string, date_format)
+def parse_datetime(date_string):
+    if date_string and len(date_string):
+        return parse(date_string)
+    return None

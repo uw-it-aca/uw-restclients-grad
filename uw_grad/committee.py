@@ -5,7 +5,7 @@ import logging
 import json
 from uw_grad.models import GradCommitteeMember, GradCommittee
 from uw_pws import PWS
-from uw_grad import get_resource, datetime_from_string
+from uw_grad import get_resource, parse_datetime
 
 
 PREFIX = "/services/students/v1/api/committee?id="
@@ -41,8 +41,8 @@ def _process_json(data):
         committee.degree_title = item.get('degreeTitle')
         committee.degree_type = item.get('degreeType')
         committee.major_full_name = item.get('majorFullName')
-        committee.start_date = datetime_from_string(item.get('startDate'))
-        committee.end_date = datetime_from_string(item.get('endDate'))
+        committee.start_date = parse_datetime(item.get('startDate'))
+        committee.end_date = parse_datetime(item.get('endDate'))
         for member in item.get('members'):
             if member.get('status') == "inactive":
                 continue
@@ -51,12 +51,12 @@ def _process_json(data):
             com_mem.first_name = member.get('nameFirst')
             com_mem.last_name = member.get('nameLast')
 
-            if member.get('memberType') is not None and\
-                    len(member.get('memberType')) > 0:
+            if member.get('memberType') and\
+               len(member.get('memberType')):
                 com_mem.member_type = member.get('memberType').lower()
 
-            if member.get('readingType') is not None and\
-                    len(member.get('readingType')) > 0:
+            if member.get('readingType') and\
+               len(member.get('readingType')):
                 com_mem.reading_type = member.get('readingType').lower()
 
             com_mem.dept = member.get('dept')
