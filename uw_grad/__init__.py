@@ -9,11 +9,11 @@ from restclients_core.exceptions import DataFailureException
 
 
 logger = logging.getLogger(__name__)
+DAO = Grad_DAO()
 
 
 def get_resource(url):
-    dao = Grad_DAO()
-    response = dao.getURL(url, {})
+    response = DAO.getURL(url, {})
     logger.info("%s ==status==> %s" % (url, response.status))
 
     if response.status != 200:
