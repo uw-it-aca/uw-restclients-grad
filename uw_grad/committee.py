@@ -4,8 +4,7 @@ Interfacing with the Grad Scho Committee Request API
 import logging
 import json
 from uw_grad.models import GradCommitteeMember, GradCommittee
-from uw_pws import PWS
-from uw_grad import get_resource, parse_datetime
+from uw_grad import get_resource, parse_datetime, UWPWS
 
 
 PREFIX = "/services/students/v1/api/committee?id="
@@ -19,7 +18,7 @@ def get_committee_by_regid(regid):
     """
     raise: InvalidRegID, DataFailureException
     """
-    person = PWS().get_person_by_regid(regid)
+    person = UWPWS.get_person_by_regid(regid)
     return get_committee_by_syskey(person.student_system_key)
 
 
