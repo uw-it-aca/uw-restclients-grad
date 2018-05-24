@@ -4,14 +4,12 @@ This is the interface for interacting with the UW Libraries Web Service.
 
 import logging
 from dateutil.parser import parse
-from uw_pws import PWS
 from uw_grad.dao import Grad_DAO
 from restclients_core.exceptions import DataFailureException
 
 
 logger = logging.getLogger(__name__)
 DAO = Grad_DAO()
-UWPWS = PWS()
 
 
 def get_resource(url):
