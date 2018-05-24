@@ -1,18 +1,15 @@
 import datetime
 from unittest import TestCase
 from restclients_core.exceptions import DataFailureException
-from uw_grad.petition import get_petition_by_regid
-from uw_pws.util import fdao_pws_override
+from uw_grad.petition import get_petition_by_syskey
 from uw_grad.util import fdao_grad_override
 
 
 @fdao_grad_override
-@fdao_pws_override
 class PetitionTest(TestCase):
 
-    def test_get_petition_by_regid(self):
-        requests = get_petition_by_regid(
-            "9136CCB8F66711D5BE060004AC494FFE")
+    def test_get_petition_by_syskey(self):
+        requests = get_petition_by_syskey("000083856")
 
         self.assertEqual(len(requests), 4)
         petition = requests[0]
@@ -79,5 +76,4 @@ class PetitionTest(TestCase):
 
     def test_error(self):
         self.assertRaises(DataFailureException,
-                          get_petition_by_regid,
-                          "00000000000000000000000000000001")
+                          get_petition_by_syskey, "000000001")
