@@ -11,7 +11,6 @@ PREFIX = "/services/students/v1/api/leave?id="
 logger = logging.getLogger(__name__)
 
 
-
 def get_leave_by_syskey(system_key):
     url = "%s%s" % (PREFIX, system_key)
     return _process_json(json.loads(get_resource(url)))
