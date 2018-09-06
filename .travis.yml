@@ -1,7 +1,6 @@
 sudo: false
 language: python
 python:
-- '2.7'
 - '3.6'
 before_script:
 - pip install -e .
@@ -26,4 +25,4 @@ deploy:
     secure: og2aSaURgwLh85l6ZvZUZ9JQpKOws2OF0OGpzMWbNvH9VT1JLW1roEbr5ocUhnWYpkOjt+YLDL8R6Id/8KbUuMi2RXrcstoXM9/SICtfceMHX+3tlx+YLX7Xtud5q9z+QcxurfpeHjfLHyAxbwz7GE2gkUOUwtSy4i403qcMJ5TAlCmoYZn6Jdce/0n+8j9aqeduryMPHJQ2Y/jQtqt4RcYIhk3ZYHoC2TLayKyZmMU+7XYqBmFoHNwVWVenSgOGK+iB/B1/ZRnjqOGG5kSz40wSRHAkYNRRz0nGSf7w9v4zRbNRsisiEMmXRvzpFAId3ekrKlIiNuMRvVUlKCkH1iC1ExZSh1txhAnVgz8gCocNMelqJQXhxsO4dxAHlxEQzAFHoQFTL8yHxSzbhhyq0cyzWtrOssRe6srFT6aViM4pGAUX6Hp3nR4H5oh83VQxO++tosOkalA80rLDhw5WCja4ETmTYOqCwWNlIgEcWBgSCQvpwds32UHUx/D7wIbX2U9Lqw9ij64tjIDTAKy2zcPhH6WhqL8OWR5jyrGz5Ug6YN1CUd4Scz0WmrlDodWQ9sk2iG2YNiLc/wERYHvDPcme5eCIi+21PBfMI/ZkTXZXNe3fmfXPPaU4IkUjT0OHAn+4qySr2mBHUaKb2Ne1Lw3ceRCHTs0uJ+CLcpxEJfM=
   on:
     tags: true
-condition: $TRAVIS_PYTHON_VERSION = "2.7"
+condition: $TRAVIS_PYTHON_VERSION = "3.6"
