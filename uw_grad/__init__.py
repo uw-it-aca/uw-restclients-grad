@@ -14,7 +14,7 @@ DAO = Grad_DAO()
 
 def get_resource(url):
     response = DAO.getURL(url, {})
-    logger.info("%s ==status==> %s" % (url, response.status))
+    logger.debug("%s ==status==> %s" % (url, response.status))
 
     if response.status != 200:
         raise DataFailureException(url, response.status, response.data)
