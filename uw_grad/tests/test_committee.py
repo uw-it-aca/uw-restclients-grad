@@ -87,5 +87,10 @@ class CommitteeTest(TestCase):
                          None)
 
     def test_error(self):
+        # Not found syskey
         self.assertRaises(DataFailureException,
                           get_committee_by_syskey, "0000000001")
+
+        # Not found status param
+        self.assertRaises(DataFailureException,
+                          get_committee_by_syskey, "000083856", status="all")
