@@ -84,8 +84,13 @@ class CommitteeTest(TestCase):
                          "GSR")
         member_json = json_data["members"][3]
         self.assertEqual(member_json["member_type"],
-                             None)
+                         None)
 
     def test_error(self):
+        # Not found syskey
         self.assertRaises(DataFailureException,
                           get_committee_by_syskey, "0000000001")
+
+        # Not found status param
+        self.assertRaises(DataFailureException,
+                          get_committee_by_syskey, "000083856", status="all")

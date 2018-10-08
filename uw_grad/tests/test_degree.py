@@ -38,5 +38,11 @@ class DegreeTest(TestCase):
         self.assertTrue(degree.is_status_not_graduate())
 
     def test_error(self):
+        # Not found syskey
         self.assertRaises(DataFailureException,
                           get_degree_by_syskey, "000000001")
+
+        # Not found exclude_past_quarter param
+        self.assertRaises(
+            DataFailureException, get_degree_by_syskey,
+            "000083856", exclude_past_quarter=False)

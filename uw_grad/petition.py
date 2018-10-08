@@ -1,18 +1,19 @@
 """
-Interfacing with the Grad Scho Petition Request API
+Interfacing with the Grad School Petition Request API
 """
 import logging
 import json
+from urllib.parse import urlencode
 from uw_grad.models import GradPetition
 from uw_grad import get_resource, parse_datetime
 
 
-PREFIX = "/services/students/v1/api/petition?id="
+PREFIX = "/services/students/v1/api/petition"
 logger = logging.getLogger(__name__)
 
 
 def get_petition_by_syskey(system_key):
-    url = "%s%s" % (PREFIX, system_key)
+    url = "{}?{}".format(PREFIX, urlencode([("id", system_key), ]))
     return _process_json(json.loads(get_resource(url)))
 
 
