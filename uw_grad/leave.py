@@ -1,18 +1,19 @@
 """
-Interfacing with the GradScho Degree Request API
+Interfacing with the GradSchool Degree Request API
 """
 import logging
 import json
+from urllib.parse import urlencode
 from uw_grad.models import GradLeave, GradTerm
 from uw_grad import get_resource, parse_datetime
 
 
-PREFIX = "/services/students/v1/api/leave?id="
+PREFIX = "/services/students/v1/api/leave"
 logger = logging.getLogger(__name__)
 
 
 def get_leave_by_syskey(system_key):
-    url = "%s%s" % (PREFIX, system_key)
+    url = "{}?{}".format(PREFIX, urlencode([("id", system_key), ]))
     return _process_json(json.loads(get_resource(url)))
 
 

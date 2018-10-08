@@ -123,19 +123,19 @@ class GradCommitteeMember(models.Model):
     status = models.CharField(max_length=64)
 
     def __eq__(self, other):
-        return self.member_type == other.member_type and\
-            self.last_name == other.last_name and\
-            self.first_name == other.first_name
+        return (self.member_type == other.member_type and
+                self.last_name == other.last_name and
+                self.first_name == other.first_name)
 
     def __ne__(self, other):
-        return self.member_type != other.member_type or\
-            self.last_name != other.last_name or\
-            self.first_name != other.first_name
+        return (self.member_type != other.member_type or
+                self.last_name != other.last_name or
+                self.first_name != other.first_name)
 
     def __lt__(self, other):
-        return self.member_type == other.member_type and\
-            self.last_name < other.last_name or\
-            self.member_type < other.member_type
+        return (self.member_type == other.member_type and
+                self.last_name < other.last_name or
+                self.member_type < other.member_type)
 
     def is_type_chair(self):
         return self.member_type == self.CHAIR
@@ -147,29 +147,29 @@ class GradCommitteeMember(models.Model):
         return self.member_type == self.MEMBER
 
     def is_reading_committee_member(self):
-        return self.reading_type is not None and\
-            self.reading_type == self.MEMBER
+        return (self.reading_type is not None and
+                self.reading_type == self.MEMBER)
 
     def is_reading_committee_chair(self):
-        return self.reading_type is not None and\
-            self.reading_type == self.CHAIR
+        return (self.reading_type is not None and
+                self.reading_type == self.CHAIR)
 
     def get_reading_display(self):
-        if self.is_reading_committee_chair() or\
-                self.is_reading_committee_member():
+        if (self.is_reading_committee_chair() or
+                self.is_reading_committee_member()):
             return self.get_reading_type_display()
         return None
 
     def __str__(self):
-        return "%s: %s, %s: %s, %s: %s, %s: %s, %s: %s, %s: %s, %s: %s" %\
-            (
-             "member_type", self.member_type,
-             "reading_type", self.reading_type,
-             "last_name", self.last_name,
-             "first_name", self.first_name,
-             "dept", self.dept,
-             "email", self.email,
-             "status", self.status)
+        return ("member_type: {}, reading_type: {}, last_name: {}, "
+                "first_name: {}, dept: {}, email: {}, status: {}").format(
+            self.member_type,
+            self.reading_type,
+            self.last_name,
+            self.first_name,
+            self.dept,
+            self.email,
+            self.status)
 
     def json_data(self):
         return {
