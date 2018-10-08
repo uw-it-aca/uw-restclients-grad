@@ -49,7 +49,6 @@ class PetitionTest(TestCase):
         self.assertEqual(json_data['gradschool_decision'],
                          "Pending")
 
-
         petition = requests[2]
         self.assertEqual(petition.dept_recommend, "withdraw")
         self.assertEqual(petition.gradschool_decision, "withdraw")
@@ -61,7 +60,6 @@ class PetitionTest(TestCase):
                          "Withdraw")
         self.assertEqual(json_data['gradschool_decision'],
                          "Withdraw")
-
 
         petition = requests[3]
         self.assertEqual(petition.gradschool_decision, "withdrawn")

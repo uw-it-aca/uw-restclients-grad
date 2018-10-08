@@ -84,7 +84,7 @@ class CommitteeTest(TestCase):
                          "GSR")
         member_json = json_data["members"][3]
         self.assertEqual(member_json["member_type"],
-                             None)
+                         None)
 
     def test_error(self):
         self.assertRaises(DataFailureException,
