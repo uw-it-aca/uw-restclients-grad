@@ -1,19 +1,20 @@
 """
-Interfacing with the Grad Scho Committee Request API
+Interfacing with the Grad School Committee Request API
 """
 import logging
 import json
+from urllib.parse import urlencode
 from uw_grad.models import GradCommitteeMember, GradCommittee
 from uw_grad import get_resource, parse_datetime
 
 
-PREFIX = "/services/students/v1/api/committee?id="
-SUFFIX = "&status=active"
+PREFIX = "/services/students/v1/api/committee"
 logger = logging.getLogger(__name__)
 
 
-def get_committee_by_syskey(system_key):
-    url = "%s%s%s" % (PREFIX, system_key, SUFFIX)
+def get_committee_by_syskey(system_key, status="active"):
+    params = [("id", system_key), ("status", status), ]
+    url = "{}?{}".format(PREFIX, urlencode(params))
     return _process_json(json.loads(get_resource(url)))
 
 

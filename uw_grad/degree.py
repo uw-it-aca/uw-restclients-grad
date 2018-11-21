@@ -1,19 +1,22 @@
 """
-Interfacing with the Grad Scho Degree Request API
+Interfacing with the Grad School Degree Request API
 """
 import logging
 import json
+from urllib.parse import urlencode
 from uw_grad.models import GradDegree
 from uw_grad import get_resource, parse_datetime
 
 
-PREFIX = "/services/students/v1/api/request?id="
-SUFFIX = "&exclude_past_quarter=true"
+PREFIX = "/services/students/v1/api/request"
 logger = logging.getLogger(__name__)
 
 
-def get_degree_by_syskey(system_key):
-    url = "%s%s%s" % (PREFIX, system_key, SUFFIX)
+def get_degree_by_syskey(system_key, exclude_past_quarter=True):
+    params = [
+        ("id", system_key),
+        ("exclude_past_quarter", "true" if exclude_past_quarter else ""), ]
+    url = "{}?{}".format(PREFIX, urlencode(params))
     return _process_json(json.loads(get_resource(url)))
 
 
