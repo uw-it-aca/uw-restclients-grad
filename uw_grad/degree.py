@@ -1,3 +1,6 @@
+# Copyright 2021 UW-IT, University of Washington
+# SPDX-License-Identifier: Apache-2.0
+
 """
 Interfacing with the Grad School Degree Request API
 """
@@ -36,8 +39,8 @@ def _process_json(json_data):
         degree.decision_date = parse_datetime(item.get('decisionDate'))
         degree.status = item["status"]
         degree.target_award_year = item["targetAwardYear"]
-        if item.get("targetAwardQuarter")and\
-           len(item.get("targetAwardQuarter")):
+        if (item.get("targetAwardQuarter") and
+                len(item.get("targetAwardQuarter"))):
             degree.target_award_quarter = item["targetAwardQuarter"].lower()
 
         requests.append(degree)
